@@ -210,11 +210,12 @@ def predict():
         
         # Save to the database
         try:
-            Prediction.create(
-                observation_id=observation_id,
-                observation=json.dumps(features_data),  # Save the original full input
-                prediction=int(prediction)
-            )
+            with DB.atomic():
+                Prediction.create(
+                    observation_id=observation_id,
+                    observation=json.dumps(features_data),
+                    prediction=int(prediction)
+                )
         except IntegrityError:
             response['warning'] = f"Observation ID '{observation_id}' already exists. Not saved to database."
             DB.rollback()
