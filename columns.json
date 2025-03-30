@@ -1,1 +1,1 @@
-["Facility Id", "Age Group", "Race", "Ethnicity", "Type of Admission", "CCS Diagnosis Code", "CCS Procedure Code", "APR DRG Code", "APR MDC Code", "APR Severity of Illness Code", "APR Risk of Mortality"]
+["Facility Id", "Age Group", "Race", "Type of Admission", "CCS Diagnosis Code", "CCS Procedure Code", "APR DRG Code", "APR MDC Code", "APR Severity of Illness Code", "APR Risk of Mortality", "Attending Provider License Number", "Emergency Department Indicator", "Gender", "Health Service Area"]
