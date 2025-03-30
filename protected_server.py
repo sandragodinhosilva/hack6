@@ -204,12 +204,14 @@ def predict():
             'prediction': int(prediction),
             'features_used': list(model_features.keys())
         }
+        # Remove observation_id from input to not consider it as a feature
+        features_data = {k: v for k, v in input_data.items() if k != 'observation_id'}
         
         # Save to the database
         try:
             Prediction.create(
                 observation_id=observation_id,
-                observation=json.dumps(input_data),  # Save the original full input
+                observation=json.dumps(features_data),  # Save the original full input
                 prediction=int(prediction)
             )
         except IntegrityError:
