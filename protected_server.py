@@ -4,10 +4,9 @@ import joblib
 import pandas as pd
 from flask import Flask, jsonify, request
 import os
-from peewee import (
-    SqliteDatabase, PostgresqlDatabase, Model, IntegerField,
-    FloatField, TextField, IntegrityError
-)
+from peewee import (SqliteDatabase, PostgresqlDatabase, Model, IntegerField,
+    FloatField, TextField, IntegrityError, CharField)
+
 from playhouse.shortcuts import model_to_dict
 from playhouse.db_url import connect
 
