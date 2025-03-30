@@ -18,6 +18,7 @@ DB = connect(os.environ.get('DATABASE_URL') or 'sqlite:///predictions.db')
 
 class Prediction(Model):
     observation_id = CharField(primary_key=True, max_length=50)
+    oberservation = TextField()
     prediction = IntegerField()
     true_class = IntegerField(null=True)
 
