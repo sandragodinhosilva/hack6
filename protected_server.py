@@ -56,7 +56,6 @@ def extract_model_features(input_data):
     """
     # Define the columns the model expects
     required_columns = {
-        "observation_id",
         "Facility Id",
         "Age Group",
         "Race",
@@ -178,7 +177,8 @@ def predict():
     input_data = request.get_json()
     
     # Check if observation_id exists
-    if "observation_id" not in input_data:
+    #if "observation_id" not in input_data:
+    if "observation_id" not in input_data or not isinstance(input_data["observation_id"], str) or input_data["observation_id"] == "":
         return jsonify({'error': "Field 'observation_id' not found in input"})
     
     observation_id = input_data['observation_id']
