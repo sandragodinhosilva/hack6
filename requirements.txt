@@ -8,4 +8,4 @@ peewee==3.17.9             # S06
 #gunicorn==23.0.0          # S06
 psycopg2-binary==2.9.10    # S06
 lightgbm==4.6.0
-xgboost==2.1.0
+xgboost==3.0.0
