@@ -3,7 +3,7 @@ import pickle
 import joblib
 import pandas as pd
 from flask import Flask, jsonify, request
-from peewee import (
+import os
 from peewee import (
     SqliteDatabase, PostgresqlDatabase, Model, IntegerField,
     FloatField, TextField, IntegrityError
