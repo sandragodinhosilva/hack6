@@ -34,10 +34,14 @@ with open('columns.json') as fh:
     columns = json.load(fh)
 
 with open('pipeline.pickle', 'rb') as fh:
-    pipeline = joblib.load(fh)
+    pipeline = joblib.load(fh)  # Ensure joblib is used consistently
 
 with open('dtypes.pickle', 'rb') as fh:
     dtypes = pickle.load(fh)
+
+# Ensure columns and dtypes are loaded correctly
+if not columns or not dtypes:
+    raise ValueError("Model columns or dtypes could not be loaded. Please check the files.")
 
 # End model loading
 ########################################
@@ -205,20 +209,17 @@ def predict():
             'prediction': int(prediction),
             'features_used': list(model_features.keys())
         }
-        # Remove observation_id from input to not consider it as a feature
-        features_data = {k: v for k, v in input_data.items() if k != 'observation_id'}
         
         # Save to the database
         try:
             with DB.atomic():
                 Prediction.create(
                     observation_id=observation_id,
-                    observation=json.dumps(features_data),
+                    observation=json.dumps(model_features),  # Use model_features directly
                     prediction=int(prediction)
                 )
         except IntegrityError:
             response['warning'] = f"Observation ID '{observation_id}' already exists. Not saved to database."
-            DB.rollback()
         
         return jsonify(response)
         
